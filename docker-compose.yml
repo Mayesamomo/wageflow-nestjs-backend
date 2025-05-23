@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: wageflow-backend
+    ports:
+      - '3000:3000'
+    depends_on:
+      - postgres
+    environment:
+      - NODE_ENV=production
+      - DB_TYPE=postgres
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=postgres
+      - DB_DATABASE=wageflow
+      - DB_SYNC=true
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_ACCESS_EXPIRATION=${JWT_ACCESS_EXPIRATION}
+      - JWT_REFRESH_EXPIRATION=${JWT_REFRESH_EXPIRATION}
+      - MAPS_API_KEY=${MAPS_API_KEY}
+    networks:
+      - wageflow-network
+    volumes:
+      - ./uploads:/app/uploads
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: wageflow-postgres
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=wageflow
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - wageflow-network
+    restart: unless-stopped
+
+networks:
+  wageflow-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
