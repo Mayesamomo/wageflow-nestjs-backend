@@ -143,6 +143,3 @@ This project uses GitHub Actions for CI/CD, which:
    docker-compose -f docker-compose.prod.yml up -d
    ```
 
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.

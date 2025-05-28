@@ -2,7 +2,7 @@
   "name": "wageflow-backend",
   "version": "0.0.1",
   "description": "Healthcare time-tracking and invoicing platform",
-  "author": "",
+  "author": "Michael Momo",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
